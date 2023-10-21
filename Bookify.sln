@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3221C310-808E-4FC5-8931-3053D35C34E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FA93D7C7-9AC8-42B5-8A29-ACCA10669603}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Domain", "src\Bookify.Domain\Bookify.Domain.csproj", "{7B275A9D-8055-4540-8017-F1EF5546CEBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B275A9D-8055-4540-8017-F1EF5546CEBC} = {3221C310-808E-4FC5-8931-3053D35C34E1}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B275A9D-8055-4540-8017-F1EF5546CEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B275A9D-8055-4540-8017-F1EF5546CEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B275A9D-8055-4540-8017-F1EF5546CEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B275A9D-8055-4540-8017-F1EF5546CEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
