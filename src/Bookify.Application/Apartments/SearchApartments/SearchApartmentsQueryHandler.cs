@@ -27,6 +27,7 @@ internal sealed class
         }
 
         using var connection = _sqlConnectionFactory.CreateConnection();
+
         const string sql = """
                            SELECT
                                a.id AS Id,
@@ -40,15 +41,15 @@ internal sealed class
                                a.address_city AS City,
                                a.address_street AS Street
                            FROM apartments AS a
-                           WHERE NOT EXIST
+                           WHERE NOT EXISTS
                            (
                                SELECT 1
                                FROM bookings AS b
                                WHERE
-                               b.apartment_id = a.id AND
-                               b.duration_start <= @EndDate AND
-                               b.duration_end >= @StartDate AND
-                               b.status = ANY(@ActiveBookingStatuses)
+                                   b.apartment_id = a.id AND
+                                   b.duration_start <= @EndDate AND
+                                   b.duration_end >= @StartDate AND
+                                   b.status = ANY(@ActiveBookingStatuses)
                            )
                            """;
 
@@ -57,6 +58,7 @@ internal sealed class
                 sql,
                 (apartment, address) => {
                     apartment.Address = address;
+
                     return apartment;
                 },
                 new {
@@ -64,8 +66,7 @@ internal sealed class
                     request.EndDate,
                     ActiveBookingStatuses
                 },
-                splitOn: "Country"
-            );
+                splitOn: "Country");
 
         return apartments.ToList();
     }
