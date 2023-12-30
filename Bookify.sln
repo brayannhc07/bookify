@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Api", "src\Bookify.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F39E35FE-57B5-4154-B345-A1BB1A0C17B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Application.UnitTests", "tests\Bookify.Application.UnitTests\Bookify.Application.UnitTests.csproj", "{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Domain.UnitTests", "tests\Bookify.Domain.UnitTests\Bookify.Domain.UnitTests.csproj", "{8CD52544-C243-4029-B04F-4D3980D875E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.ArchitectureTests", "tests\Bookify.ArchitectureTests\Bookify.ArchitectureTests.csproj", "{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +49,18 @@ Global
 		{F39E35FE-57B5-4154-B345-A1BB1A0C17B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39E35FE-57B5-4154-B345-A1BB1A0C17B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39E35FE-57B5-4154-B345-A1BB1A0C17B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD52544-C243-4029-B04F-4D3980D875E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD52544-C243-4029-B04F-4D3980D875E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD52544-C243-4029-B04F-4D3980D875E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD52544-C243-4029-B04F-4D3980D875E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +70,8 @@ Global
 		{D562941B-514B-4A2A-A876-62D73632ECE2} = {3221C310-808E-4FC5-8931-3053D35C34E1}
 		{4951E10A-949B-4902-9459-09A7E05331B9} = {3221C310-808E-4FC5-8931-3053D35C34E1}
 		{DF96393E-15FE-4703-88C0-4786106B3239} = {3221C310-808E-4FC5-8931-3053D35C34E1}
+		{F6CF53E9-6702-48D8-8BFE-85F0AA38BDA8} = {FA93D7C7-9AC8-42B5-8A29-ACCA10669603}
+		{8CD52544-C243-4029-B04F-4D3980D875E5} = {FA93D7C7-9AC8-42B5-8A29-ACCA10669603}
+		{44B560E6-A2CB-4BCA-AE71-4DC0E74403F7} = {FA93D7C7-9AC8-42B5-8A29-ACCA10669603}
 	EndGlobalSection
 EndGlobal
