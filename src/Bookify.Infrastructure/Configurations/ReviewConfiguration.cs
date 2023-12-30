@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Bookify.Infrastructure.Configurations;
 
-internal sealed class ReviewConfiguration : IEntityTypeConfiguration<Review>
-{
-    public void Configure(EntityTypeBuilder<Review> builder)
-    {
+internal sealed class ReviewConfiguration : IEntityTypeConfiguration<Review> {
+    public void Configure(EntityTypeBuilder<Review> builder) {
         builder.ToTable("reviews");
 
         builder.HasKey(review => review.Id);
+        builder.Property(review => review.Id)
+            .HasConversion(reviewId => reviewId.Value, value => new ReviewId(value));
 
         builder.Property(review => review.Rating)
             .HasConversion(rating => rating.Value, value => Rating.Create(value).Value);

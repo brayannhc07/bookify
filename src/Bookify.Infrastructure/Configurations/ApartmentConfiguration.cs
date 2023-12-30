@@ -9,6 +9,8 @@ internal sealed class ApartmentConfiguration : IEntityTypeConfiguration<Apartmen
     public void Configure(EntityTypeBuilder<Apartment> builder) {
         builder.ToTable("apartments");
         builder.HasKey(apartment => apartment.Id);
+        builder.Property(apartment => apartment.Id)
+          .HasConversion(apartmentId => apartmentId.Value, value => new ApartmentId(value));
         builder.OwnsOne(apartment => apartment.Address);
         builder.Property(apartment => apartment.Name)
             .HasMaxLength(200)

@@ -1,15 +1,25 @@
-﻿using Bookify.Application.Exceptions;
+﻿using Bookify.Application.Abstractions.Clock;
+using Bookify.Application.Exceptions;
 using Bookify.Domain.Abstractions;
+using Bookify.Infrastructure.Outbox;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Bookify.Infrastructure;
 
 public sealed class ApplicationDbContext : DbContext, IUnitOfWork {
-    private readonly IPublisher _publisher;
+    private static readonly JsonSerializerSettings JsonSerializerSettings = new() {
+        TypeNameHandling = TypeNameHandling.All
+    };
 
-    public ApplicationDbContext(DbContextOptions options, IPublisher publisher) : base(options) {
+    private readonly IPublisher _publisher;
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public ApplicationDbContext(DbContextOptions options, IPublisher publisher, IDateTimeProvider dateTimeProvider) :
+        base(options) {
         _publisher = publisher;
+        _dateTimeProvider = dateTimeProvider;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -19,8 +29,8 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork {
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) {
         try {
+            AddDomainEventsAsOutboxMessages();
             var result = await base.SaveChangesAsync(cancellationToken);
-            await PublishDomainEventsAsync(cancellationToken);
             return result;
         }
         catch (DbUpdateConcurrencyException ex) {
@@ -28,19 +38,19 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork {
         }
     }
 
-    private async Task PublishDomainEventsAsync(CancellationToken cancellationToken = default) {
+    private void AddDomainEventsAsOutboxMessages() {
         var domainEvents = ChangeTracker
-            .Entries<Entity>()
+            .Entries<IEntity>()
             .Select(entry => entry.Entity)
             .SelectMany(entity => {
                 var domainEvents = entity.GetDomainEvents();
                 entity.ClearDomainEvents();
                 return domainEvents;
             })
-            .ToList();
-
-        foreach (var domainEvent in domainEvents) {
-            await _publisher.Publish(domainEvent, cancellationToken);
-        }
+            .Select(domainEvent => new OutboxMessage(Guid.NewGuid(),
+                _dateTimeProvider.UtcNow,
+                domainEvent.GetType().Name,
+                JsonConvert.SerializeObject(domainEvent, JsonSerializerSettings))).ToList();
+        AddRange(domainEvents);
     }
 }
